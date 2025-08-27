@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  url = 'http://localhost:3000'
+  url = 'https://weight-tracker-api-yj53.onrender.com'
   title = 'weight-tracker';
   weight: number | null = null;
 
