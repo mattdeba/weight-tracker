@@ -13,4 +13,11 @@
     </button>
   </form>
     <button (click)="exportAllWeights()" class="export-btn">Exporter</button>
+
+    <div *ngIf="weights && weights.length > 0" class="weights-list">
+      <div *ngFor="let w of weights" class="weight-row">
+        <span>{{ w.poids }} g</span>
+        <button (click)="deleteWeight(w.id)" class="delete-btn">Supprimer</button>
+      </div>
+    </div>
 </div>

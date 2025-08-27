@@ -12,8 +12,13 @@ export class AppComponent {
   //url = 'http://localhost:3000'
   title = 'weight-tracker';
   weight: number | null = null;
+  weights: any;
 
   constructor(private http: HttpClient) {
+  }
+
+  ngOnInit() {
+    this.http.get(this.url + '/weight').subscribe((weights: any) => this.weights = weights)
   }
 
   onSubmit() {
@@ -23,11 +28,9 @@ export class AppComponent {
   }
 
   exportAllWeights() {
-    this.http.get(this.url + '/weight').subscribe((data: any) => {
-      const csvData = this.convertToCSV(data);
-      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-      saveAs(blob, 'weights.csv');
-    });
+    const csvData = this.convertToCSV(this.weights);
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    saveAs(blob, 'weights.csv');
   }
 
   convertToCSV(objArray: any[]): string {
@@ -46,5 +49,11 @@ export class AppComponent {
       str += line + '\r\n';
     }
     return str;
+  }
+
+  deleteWeight(id: number) {
+    this.http.delete(this.url + `/weight/${id}`).subscribe(() => {
+      this.weights = this.weights.filter((w: any) => w.id !== id);
+    });
   }
 }
