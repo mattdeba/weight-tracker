@@ -8,8 +8,9 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  url = 'https://weight-tracker-api-yj53.onrender.com'
+  //url = 'https://weight-tracker-api-yj53.onrender.com'
   //url = 'http://localhost:3000'
+  url = '/api';
   title = 'weight-tracker';
   weight: number | null = null;
   weights: any;
